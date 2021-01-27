@@ -19,7 +19,7 @@ MonoBehaviour:
       de \xFAltima gera\xE7\xE3o e com presta\xE7\xF5es que cabem no seu bolso -
       segundo o an\xFAncio."
   - texto: "Seu aparelho atual ainda lhe serve bem, mas n\xE3o \xE9 um aparelho novo."
-  - texto: "Motivado pelo an\xFAncio, Miguel:"
+  - texto: "Ap\xF3s assistir o an\xFAncio, Miguel:"
   escolhas:
   - opcoes:
     - text: Visita lojas online buscando pelo aparelho anunciado.

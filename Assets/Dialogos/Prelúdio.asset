@@ -29,5 +29,7 @@ MonoBehaviour:
       Miguel termina de desfazer as suas malas e arrumar suas coisas."
   - texto: "Satisfeito pelo ambiente confort\xE1vel de ter seu pr\xF3prio lar, ele
       deita cedo e dorme, sendo recompensado com bons sonhos.\r\n"
+  - texto: "A proposta \xE9 agir como se estivesse na mesma situa\xE7\xE3o que Miguel.
+      Escolha como se fosse ele."
   escolhas: []
-  ordemElementos: 00000000000000000000000000000000000000000000000000000000
+  ordemElementos: 0000000000000000000000000000000000000000000000000000000000000000
