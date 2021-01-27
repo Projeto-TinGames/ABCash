@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3bc3f398c2f6db47a6de70abd308a03, type: 3}
+  m_Name: Situacao 4
+  m_EditorClassIdentifier: 
+  sentencas:
+  - texto: "Ap\xF3s o almo\xE7o, ainda h\xE1 um tempo antes de retomar \xE0s atividades
+      no servi\xE7o."
+  escolhas:
+  - opcoes:
+    - text: Usar o tempo para navegar em suas redes.
+      dialogoConectado: {fileID: 0}
+    - text: Ir para a sala de descanso da empresa e dormir.
+      dialogoConectado: {fileID: 0}
+    - text: Ir para a sala de descanso com seu livro e dar uma lida.
+      dialogoConectado: {fileID: 0}
+  ordemElementos: 0000000001000000

@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: "Assets/Scenes/In\xEDcio.unity"
+    guid: af8fee9094ebbb343922474d6459ae34
+  - enabled: 1
+    path: "Assets/Scenes/Prel\xFAdio.unity"
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: "Assets/Scenes/Situa\xE7\xE3o 1.unity"
+    guid: 75e252c99c2776546a295d181bab93b2
+  - enabled: 1
+    path: "Assets/Scenes/Situa\xE7\xE3o 2.unity"
+    guid: 4463408c0426f7a46a5a07e62dbb50fb
+  - enabled: 1
+    path: "Assets/Scenes/Situa\xE7\xE3o 3.unity"
+    guid: 3ff5be05c2da00b458449fd4b746379d
+  - enabled: 1
+    path: "Assets/Scenes/Situa\xE7\xE3o 4.unity"
+    guid: 7755d25c056c8a144bbaf048e4de5219
+  - enabled: 1
+    path: "Assets/Scenes/Situa\xE7\xE3o 5.unity"
+    guid: b080b4b175439b6499832597bea77101
+  - enabled: 1
+    path: "Assets/Scenes/Situa\xE7\xE3o 6.unity"
+    guid: 7313ae73c4a89264b8de103d0a7055c4
+  - enabled: 1
+    path: "Assets/Scenes/Situa\xE7\xE3o 7.unity"
+    guid: a85eb0f18baf1274ba0f51bbf5bef45c
+  - enabled: 1
+    path: "Assets/Scenes/Situa\xE7\xE3o 8.unity"
+    guid: d84b616c02089ce41831d4c357935b2c
+  - enabled: 1
+    path: "Assets/Scenes/Situa\xE7\xE3o 9.unity"
+    guid: b7b53f1213d355e4abc05a8513fc63e8
+  - enabled: 1
+    path: "Assets/Scenes/Situa\xE7\xE3o 10.unity"
+    guid: b6faff4532e2a1e49a94c2bb82095d24
+  - enabled: 1
+    path: "Assets/Scenes/Finaliza\xE7\xE3o.unity"
+    guid: 5ed2ec4304deee04ba13167f5c48a4cd
+  m_configObjects: {}

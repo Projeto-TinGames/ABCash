@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3bc3f398c2f6db47a6de70abd308a03, type: 3}
+  m_Name: Situacao 5
+  m_EditorClassIdentifier: 
+  sentencas:
+  - texto: "Ap\xF3s o fim do expediente, ele est\xE1 \xE0 caminho da sua aula."
+  - texto: "Navegando nas redes, um an\xFAncio de um novo t\xEAnis chama sua aten\xE7\xE3o."
+  - texto: "Miguel se encanta pelo modelo, que por ser um novo lan\xE7amento, est\xE1
+      com um pre\xE7o acima da m\xE9dia que ele costuma pagar normalmente. "
+  escolhas:
+  - opcoes:
+    - text: "Comprar pelo cart\xE3o de cr\xE9dito em v\xE1rias parcelas."
+      dialogoConectado: {fileID: 0}
+    - text: "N\xE3o comprar o produto, pois n\xE3o est\xE1 precisando."
+      dialogoConectado: {fileID: 0}
+    - text: Economizar para comprar a vista mais pra frente.
+      dialogoConectado: {fileID: 0}
+  ordemElementos: 00000000000000000000000001000000

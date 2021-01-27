@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3bc3f398c2f6db47a6de70abd308a03, type: 3}
+  m_Name: "Situa\xE7\xE3o 8"
+  m_EditorClassIdentifier: 
+  sentencas:
+  - texto: "Chegando em casa, ap\xF3s um longo dia, Miguel est\xE1 fazendo sua \xFAltima
+      refei\xE7\xE3o e liga a tv para quebrar o sil\xEAncio."
+  - texto: "Ent\xE3o, ele v\xEA uma propaganda de um lan\xE7amento de um smartphone
+      de \xFAltima gera\xE7\xE3o e com presta\xE7\xF5es que cabem no seu bolso -
+      segundo o an\xFAncio."
+  - texto: "Seu aparelho atual ainda lhe serve bem, mas n\xE3o \xE9 um aparelho novo."
+  - texto: "Motivado pelo an\xFAncio, Miguel:"
+  escolhas:
+  - opcoes:
+    - text: Visita lojas online buscando pelo aparelho anunciado.
+      dialogoConectado: {fileID: 0}
+    - text: "Visita lojas comparando modelos e pre\xE7os."
+      dialogoConectado: {fileID: 0}
+    - text: Decide ignorar ele por enquanto.
+      dialogoConectado: {fileID: 0}
+  ordemElementos: 0000000000000000000000000000000001000000

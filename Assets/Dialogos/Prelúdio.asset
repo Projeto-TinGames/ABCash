@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3bc3f398c2f6db47a6de70abd308a03, type: 3}
+  m_Name: "Prel\xFAdio"
+  m_EditorClassIdentifier: 
+  sentencas:
+  - texto: "Miguel \xE9 um jovem adulto que mudou-se recentemente de casa. Atualmente,
+      est\xE1 se acostumando com a nova rotina, tentando conciliar as atividades
+      dom\xE9sticas com o emprego e os estudos."
+  - texto: "A sua renda \xE9 de R$1.500,00. Seus pais ajudaram nos custos de mudan\xE7a
+      e no financiamento dos m\xF3veis da nova casa alugada, entretanto algumas d\xEDvidas
+      foram obtidas no processo."
+  - texto: "O aluguel \xE9 de R$700,00, a casa est\xE1 situada numa boa regi\xE3o
+      da cidade, com poucos crimes e est\xE1 em um excelente estado de conserva\xE7\xE3o."
+  - texto: "Por mais que sua situa\xE7\xE3o atual seja boa, seus gastos frequentes
+      ocupam boa parte do dinheiro recebido mensalmente juntamente com o aluguel
+      e as contas de luz e \xE1gua."
+  - texto: "As d\xEDvidas acumuladas tamb\xE9m o preocupam."
+  - texto: "Por\xE9m, entusiasmado com sua recente mudan\xE7a e com a casa nova,
+      Miguel termina de desfazer as suas malas e arrumar suas coisas."
+  - texto: "Satisfeito pelo ambiente confort\xE1vel de ter seu pr\xF3prio lar, ele
+      deita cedo e dorme, sendo recompensado com bons sonhos.\r\n"
+  escolhas: []
+  ordemElementos: 00000000000000000000000000000000000000000000000000000000

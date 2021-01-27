@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3bc3f398c2f6db47a6de70abd308a03, type: 3}
+  m_Name: "Situa\xE7\xE3o 9"
+  m_EditorClassIdentifier: 
+  sentencas:
+  - texto: "Pensando nas f\xE9rias de final de ano, Miguel quer aproveitar para fazer
+      uma viagem esse ano."
+  - texto: " Ainda faltam muitos meses, ent\xE3o:"
+  escolhas:
+  - opcoes:
+    - text: Ele planeja poupar uma quantia boa todos os meses.
+      dialogoConectado: {fileID: 0}
+    - text: "Ele n\xE3o estipula um valor fixo, mas planeja poupar."
+      dialogoConectado: {fileID: 0}
+    - text: Ele separa a quantia que sobrar todos os meses.
+      dialogoConectado: {fileID: 0}
+    - text: Ele vai guardando o que der.
+      dialogoConectado: {fileID: 0}
+  ordemElementos: 000000000000000001000000

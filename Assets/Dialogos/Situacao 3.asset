@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3bc3f398c2f6db47a6de70abd308a03, type: 3}
+  m_Name: Situacao 3
+  m_EditorClassIdentifier: 
+  sentencas:
+  - texto: "\xC9 hora do almo\xE7o."
+  - texto: "Antes da mudan\xE7a, a marmita de Miguel era feita por sua m\xE3e."
+  - texto: "Agora, \xE9 preciso se ajustar frente \xE0 essa nova realidade:\r"
+  escolhas:
+  - opcoes:
+    - text: "Ir no restaurante pr\xF3ximo ao local do trabalho."
+      dialogoConectado: {fileID: 0}
+    - text: "Optar por se organizar e fazer sua pr\xF3pria marmita. "
+      dialogoConectado: {fileID: 0}
+  ordemElementos: 00000000000000000000000001000000
