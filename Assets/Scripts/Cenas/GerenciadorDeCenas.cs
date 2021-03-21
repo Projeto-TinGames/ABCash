@@ -20,7 +20,7 @@ public class GerenciadorDeCenas : MonoBehaviour {
 
     private void Update() {
         if (Input.GetButtonDown("PularCena")) {
-            StartCoroutine(CarregarCena(SceneManager.GetActiveScene().buildIndex + 1,false));
+            //StartCoroutine(CarregarCena(SceneManager.GetActiveScene().buildIndex + 1,false));
         }
     }
 

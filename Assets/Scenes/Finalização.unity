@@ -580,7 +580,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.8, y: -96.1}
+  m_AnchoredPosition: {x: -1.8, y: -133}
   m_SizeDelta: {x: 350.50275, y: 192.26547}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1396643074
@@ -906,7 +906,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Agora, basta enviar o arquivo \".json\" com seu nome (gerado na pasta
-    do jogo) para o seguinte formul\xE1rio:"
+    downloads de seu computador) para o seguinte formul\xE1rio:"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

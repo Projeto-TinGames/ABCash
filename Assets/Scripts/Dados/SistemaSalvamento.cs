@@ -1,28 +1,23 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using System.Collections;
 using System.IO;
+using UnityEngine.Networking;
+
 
 public static class SistemaSalvamento {
+    public static string dadoSalvar;
+
     public static void SalvarDado(int questao, string resposta) {
-        string caminhoSalvar = System.Environment.CurrentDirectory + "/" + DadoJogador.instancia.nome + ".json";
-
+        string caminhoSalvar = DadoJogador.instancia.nome + ".json";
+        
         DadoQuestao dadoQuestao = new DadoQuestao(questao, resposta);
-
-        string dadoJson = "";
-        if (CarregarDado() != null) {
-            dadoJson = CarregarDado() + "\n";
+        
+        dadoSalvar += JsonUtility.ToJson(dadoQuestao, true);
+        if (questao == 10) {
+            Debug.Log(dadoSalvar + ", " + caminhoSalvar);
+            WebGLFileSaver.SaveFile(dadoSalvar, caminhoSalvar);
         }
-        dadoJson += JsonUtility.ToJson(dadoQuestao, true);
-        File.WriteAllText(caminhoSalvar,dadoJson);
-
-        CarregarDado();
     }
 
-    public static string CarregarDado() {
-        string caminhoCarregar = System.Environment.CurrentDirectory + "/" + DadoJogador.instancia.nome + ".json";
-        if (File.Exists(caminhoCarregar)) {
-            string dado = File.ReadAllText(caminhoCarregar);
-            return dado;
-        }
-        return null;
-    }
 }
