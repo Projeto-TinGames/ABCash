@@ -6,18 +6,16 @@ using UnityEngine.Networking;
 
 
 public static class SistemaSalvamento {
-    public static string dadoSalvar;
+    private static string dadoSalvar;
 
     public static void SalvarDado(int questao, string resposta) {
-        string caminhoSalvar = DadoJogador.instancia.nome + ".json";
-        
         DadoQuestao dadoQuestao = new DadoQuestao(questao, resposta);
-        
         dadoSalvar += JsonUtility.ToJson(dadoQuestao, true);
-        if (questao == 10) {
-            Debug.Log(dadoSalvar + ", " + caminhoSalvar);
-            WebGLFileSaver.SaveFile(dadoSalvar, caminhoSalvar);
-        }
+    }
+
+    public static void BaixarDado() {
+        string caminhoSalvar = DadoJogador.instancia.nome + ".json";
+        WebGLFileSaver.SaveFile(dadoSalvar, caminhoSalvar);
     }
 
 }
