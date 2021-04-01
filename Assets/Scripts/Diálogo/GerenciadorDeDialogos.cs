@@ -102,7 +102,7 @@ public class GerenciadorDeDialogos : MonoBehaviour {
 	public void EscolherOpcao(int indexOpcao) {
 		if (escolhendo) {
 			escolhendo = false;
-			SistemaSalvamento.SalvarDado(GerenciadorDeCenas.instancia.GetCenaNumero()-1, opcoesAtivas[indexOpcao].text);
+			SistemaSalvamento.SalvarDado(opcoesAtivas[indexOpcao].text);
 			if (opcoesAtivas[indexOpcao].dialogoConectado == null) {
 				ExecutarProximoElemento();
 				return;
@@ -122,7 +122,7 @@ public class GerenciadorDeDialogos : MonoBehaviour {
 		escolhendo = true;
 
 		for (int i = 0; i < opcoes.Count; i++) {
-			botoesOpcoes[i].gameObject.active = true;
+			botoesOpcoes[i].gameObject.SetActive(true);
 			botoesOpcoes[i].GetComponentInChildren<TextMeshProUGUI>().text = opcoes[i].text;
 		}
 	}

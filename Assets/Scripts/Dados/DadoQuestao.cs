@@ -7,8 +7,7 @@ public class DadoQuestao {
     public int questao;
     public string resposta;
 
-    public DadoQuestao (int questao, string resposta) {
-        this.questao = questao;
+    public DadoQuestao (string resposta) {
         this.resposta = resposta;
     }
 }

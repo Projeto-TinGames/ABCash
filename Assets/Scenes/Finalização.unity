@@ -557,7 +557,7 @@ GameObject:
   - component: {fileID: 1396643075}
   - component: {fileID: 1396643074}
   m_Layer: 5
-  m_Name: Formulario
+  m_Name: Enviar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -639,8 +639,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1396643074}
-        m_TargetAssemblyTypeName: Formulario, Assembly-CSharp
-        m_MethodName: AbrirFormulario
+        m_TargetAssemblyTypeName: BotaoEnvia, Assembly-CSharp
+        m_MethodName: EnviarDados
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -882,7 +882,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.47438028, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 14, y: 101}
+  m_AnchoredPosition: {x: 14, y: 116}
   m_SizeDelta: {x: 862.81726, y: 244.89026}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1468260590
@@ -905,8 +905,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Ao clicar no bot\xE3o, um arquivo de respostas (com o seu nome) ser\xE1
-    baixado e voc\xEA ser\xE1 encaminhado a um formul\xE1rio para envi\xE1-lo."
+  m_text: "Ao clicar neste bot\xE3o, voc\xEA aceita enviar suas escolhas nas dez
+    situa\xE7\xF5es apresentadas ao decorrer do jogo para uma an\xE1lise com fins
+    acad\xEAmicos."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -940,7 +941,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 8
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1273,7 +1274,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Formul\xE1rio"
+  m_text: Enviar
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
