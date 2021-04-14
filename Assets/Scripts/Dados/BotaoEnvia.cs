@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class BotaoEnvia : MonoBehaviour{
     public void EnviarDados() {
+        GetComponent<Button>().interactable = false;
         StartCoroutine(Upload());
     }
 
