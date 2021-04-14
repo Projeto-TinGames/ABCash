@@ -15,7 +15,7 @@ public class BotaoEnvia : MonoBehaviour{
         for (int i = 1; i < SistemaSalvamento.dadosSalvar.Count+1; i++) {
             form.AddField("questao", i);
             form.AddField("resposta", SistemaSalvamento.dadosSalvar[i-1]);
-            using (UnityWebRequest www = UnityWebRequest.Post("http://localhost:3000/tingames/abcash/mysql", form)) {
+            using (UnityWebRequest www = UnityWebRequest.Post("https://projetos.restinga.ifrs.edu.br/tingames/abcash", form)) {
                 yield return www.SendWebRequest();
 
                 if (www.result != UnityWebRequest.Result.Success) {
@@ -26,6 +26,7 @@ public class BotaoEnvia : MonoBehaviour{
                 }
             }
         }
+        Application.OpenURL("https://projetos.restinga.ifrs.edu.br/tingames");
         Application.Quit();
     }
 }
