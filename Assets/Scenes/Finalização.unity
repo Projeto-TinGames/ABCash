@@ -181,7 +181,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
 --- !u!223 &542873431
 Canvas:
   m_ObjectHideFlags: 0
@@ -610,7 +609,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
-    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -621,7 +619,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.8773585, g: 0.7592209, b: 0.4014329, a: 1}
     m_PressedColor: {r: 0.7924528, g: 0.6867475, b: 0.36258456, a: 1}
     m_SelectedColor: {r: 1, g: 0.86274517, b: 0.44705886, a: 1}
-    m_DisabledColor: {r: 0.79215693, g: 0.6862745, b: 0.36078432, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
