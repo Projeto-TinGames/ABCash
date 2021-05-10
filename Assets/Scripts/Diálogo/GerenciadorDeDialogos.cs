@@ -8,15 +8,15 @@ public class GerenciadorDeDialogos : MonoBehaviour {
     public static GerenciadorDeDialogos instancia;
 
     public TextMeshProUGUI caixaDialogo;
-    public GameObject opcoes;
-    private Button[] botoesOpcoes;
-	private string textoAtivo;
+    public GameObject opcoes; //Objeto que engloba as opções
+    private Button[] botoesOpcoes; //Vetor das opções armazenados no objeto
+	private string textoAtivo; //Texto sendo escrito pelo gerenciador
 
-    public Dialogo dialogo; // Lista de dialogos a serem executados
+    public Dialogo dialogo; // Objeto de diálogo a ser executado
     public Queue<ElementoDeDialogo> filaElementos; // Fila de elementos a serem executados
-	private List<Opcao> opcoesAtivas = new List<Opcao>();
+	private List<Opcao> opcoesAtivas = new List<Opcao>(); //É definido quando um elemento de escolha é executado
 
-	private bool escolhendo;
+	private bool escolhendo; //Previne a passagem de elementos enquanto estiver executando uma escolha
 
 	// Acontece antes do Start
 	private void Awake() {
@@ -52,6 +52,7 @@ public class GerenciadorDeDialogos : MonoBehaviour {
         int indexSentencas = 0;
         int indexEscolhas = 0;
 
+		//Definir fila de elementos
         foreach (int element in dialogo.ordemElementos) {
             switch(dialogo.tiposElementos[element]) {
                 case "Sentence":
@@ -99,7 +100,17 @@ public class GerenciadorDeDialogos : MonoBehaviour {
 		textoAtivo = null;
 	}
 
-	public void EscolherOpcao(int indexOpcao) {
+	public void DefinirBotoesEscolha(List<Opcao> opcoes) { //Acionado na execução de um elemento de escolha
+		opcoesAtivas = opcoes;
+		escolhendo = true;
+
+		for (int i = 0; i < opcoes.Count; i++) {
+			botoesOpcoes[i].gameObject.SetActive(true);
+			botoesOpcoes[i].GetComponentInChildren<TextMeshProUGUI>().text = opcoes[i].text;
+		}
+	}
+
+	public void EscolherOpcao(int indexOpcao) { //Acionado no clique dos botões de execução
 		if (escolhendo) {
 			escolhendo = false;
 			SistemaSalvamento.SalvarDado(opcoesAtivas[indexOpcao].text);
@@ -111,19 +122,9 @@ public class GerenciadorDeDialogos : MonoBehaviour {
 		}
 	}
 
-    public void AtualizarCaixaDialogo(ElementoDeDialogo element) {
+    public void AtualizarCaixaDialogo(ElementoDeDialogo element) { //Apagar opções
 		for (int i = 0; i < botoesOpcoes.Length; i++) {
 			botoesOpcoes[i].gameObject.SetActive(false);
-		}
-	}
-
-	public void DefinirBotoesEscolha(List<Opcao> opcoes) {
-		opcoesAtivas = opcoes;
-		escolhendo = true;
-
-		for (int i = 0; i < opcoes.Count; i++) {
-			botoesOpcoes[i].gameObject.SetActive(true);
-			botoesOpcoes[i].GetComponentInChildren<TextMeshProUGUI>().text = opcoes[i].text;
 		}
 	}
 }

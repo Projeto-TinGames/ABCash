@@ -138,6 +138,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -11.677246
       objectReference: {fileID: 0}
+    - target: {fileID: 5885232813770394709, guid: 365a0101a4b0c9d41a2ec92e9075c60d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5885232814106006683, guid: 365a0101a4b0c9d41a2ec92e9075c60d, type: 3}
       propertyPath: dialogo
       value: 
