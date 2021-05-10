@@ -26,7 +26,7 @@ public class BotaoEnvia : MonoBehaviour{
                 if (fullDataId >= 0) {
                     id = fullDataId;
                 }
-                StartCoroutine(UploadUsuario(id+1,"url"));
+                StartCoroutine(UploadUsuario(id+1,url));
             }
         }
     }
@@ -45,7 +45,7 @@ public class BotaoEnvia : MonoBehaviour{
             }
             else {
                 Debug.Log("User form upload complete!");
-                StartCoroutine(UploadRespostas(id,"url"));
+                StartCoroutine(UploadRespostas(id,url));
             }
         }
     }
