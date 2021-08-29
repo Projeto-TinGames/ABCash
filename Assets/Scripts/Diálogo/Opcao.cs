@@ -4,6 +4,8 @@ using UnityEngine;
 
 [System.Serializable]
 public class Opcao {
-    public string text;
+    public string texto;
     public Dialogo dialogoConectado;
+
+    [HideInInspector]public int id = 0;
 }

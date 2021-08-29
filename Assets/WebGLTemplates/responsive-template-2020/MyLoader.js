@@ -20,11 +20,7 @@ function createUnityInstance(canvas, config, onProgress) {
       error && typeof error.lineNumber == "number" ? error.lineNumber :
       error && typeof error.line == "number" ? error.line :
       0;
-#if SYMBOLS_FILENAME
-    demanglingErrorHandler(message, filename, lineno);
-#else // SYMBOLS_FILENAME
     errorHandler(message, filename, lineno);
-#endif // SYMBOLS_FILENAME
   }
 
   var Module = {
@@ -32,14 +28,9 @@ function createUnityInstance(canvas, config, onProgress) {
     webglContextAttributes: {
       preserveDrawingBuffer: false,
     },
-#if USE_DATA_CACHING
     cacheControl: function (url) {
       return url == Module.dataUrl ? "must-revalidate" : "no-store";
     },
-#endif // USE_DATA_CACHING
-#if !USE_WASM
-    TOTAL_MEMORY: {{{ TOTAL_MEMORY }}},
-#endif // !USE_WASM
     streamingAssetsUrl: "StreamingAssets",
     downloadProgress: {},
     deinitializers: [],
@@ -63,24 +54,10 @@ function createUnityInstance(canvas, config, onProgress) {
     },
     locateFile: function (url) {
       return (
-#if USE_WASM && !DECOMPRESSION_FALLBACK
         url == "build.wasm" ? this.codeUrl :
-#endif // USE_WASM && !DECOMPRESSION_FALLBACK
-#if USE_THREADS
-#if DECOMPRESSION_FALLBACK
-        url == "pthread-main.js" ? this.frameworkBlobUrl :
-#else // DECOMPRESSION_FALLBACK
-        url == "pthread-main.js" ? this.frameworkUrl :
-#endif // DECOMPRESSION_FALLBACK
-#endif // USE_THREADS
         url
       );
     },
-#if USE_THREADS
-    // The contents of "pthread-main.js" is embedded in the framework, which is used as a worker source.
-    // Therefore Module.mainScriptUrlOrBlob is no longer needed and is set to a dummy blob for compatibility reasons.
-    mainScriptUrlOrBlob: new Blob([" "], { type: "application/javascript" }),
-#endif // USE_THREADS
     disabledCanvasEvents: [
       "contextmenu",
       "dragstart",
@@ -138,32 +115,6 @@ function createUnityInstance(canvas, config, onProgress) {
   };
 
   Module.SystemInfo = (function () {
-#if 0
-    // Recognize and parse the following formats of user agents:
-
-    // Opera 71 on Windows 10:         Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36 OPR/71.0.3770.228
-    // Edge 85 on Windows 10:          Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36 Edg/85.0.564.70
-    // Firefox 81 on Windows 10:       Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:81.0) Gecko/20100101 Firefox/81.0
-    // Chrome 85 on Windows 10:        Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36
-    // IE 11 on Windows 7:             Mozilla/5.0 CK={} (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko
-    // IE 10 on Windows 7:             Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; WOW64; Trident/6.0)
-
-    // Chrome 80 on Android 8.0.0:     Mozilla/5.0 (Linux; Android 8.0.0; VKY-L29) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Mobile Safari/537.36
-    // Firefox 68 on Android 8.0.0:    Mozilla/5.0 (Android 8.0.0; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0
-
-    // Samsung Browser on Android 9:   Mozilla/5.0 (Linux; Android 9; SAMSUNG SM-G960U) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/10.2 Chrome/71.0.3578.99 Mobile Safari/537.36
-    // Safari 13.0.5 on iPhone 13.3.1: Mozilla/5.0 (iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.5 Mobile/15E148 Safari/604.1
-
-    // Safari 12.1 on iPad OS 12.2     Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.1 Mobile/15E148 Safari/604.1
-
-    // Safari 14 on macOS 11.0:        Mozilla/5.0 (Macintosh; Intel Mac OS X 11_0) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1
-    // Safari 14 on macOS 10.15.6:     Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Safari/605.1.15
-    // Firefox 80 on macOS 10.15:      Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:80.0) Gecko/20100101 Firefox/80.0
-    // Chrome 65 on macOS 10.15.6:     Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36
-
-    // Firefox 57 on FreeBSD:          Mozilla/5.0 (X11; FreeBSD amd64; rv:57.0) Gecko/20100101 Firefox/57.0
-    // Chrome 43 on OpenBSD:           Mozilla/5.0 (X11; OpenBSD amd64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.125 Safari/537.36
-#endif
 
     var browser, browserVersion, os, osVersion, canvas, gpu;
 
@@ -294,50 +245,9 @@ function createUnityInstance(canvas, config, onProgress) {
     errorHandler.didShowErrorMessage = true;
   }
 
-#if SYMBOLS_FILENAME
-  function demangleMessage(message, symbols) {
-#if USE_WASM
-    var symbolExp = "(wasm-function\\[)(\\d+)(\\])";
-#else // USE_WASM
-    var symbolExp = "(\\n|\\n    at |\\n    at Array\\.)([a-zA-Z0-9_$]+)(@| \\()";
-#endif // USE_WASM
-    var symbolRegExp = new RegExp(symbolExp);
-    return message.replace(new RegExp(symbolExp, "g"), function (symbol) {
-      var match = symbol.match(symbolRegExp);
-#if USE_WASM
-      return match[1] + (symbols[match[2]] ? symbols[match[2]] + "@" : "") + match[2] + match[3];
-#else // USE_WASM
-      return match[1] + match[2] + (symbols[match[2]] ? "[" + symbols[match[2]] + "]" : "") + match[3];
-#endif // USE_WASM
-    });
-  }
-
-  function demanglingErrorHandler(message, filename, lineno) {
-    if (Module.symbols) {
-      errorHandler(demangleMessage(message, Module.symbols), filename, lineno);
-    } else if (!Module.symbolsUrl) {
-      errorHandler(message, filename, lineno);
-    } else {
-      downloadBinary("symbolsUrl").then(function (data) {
-        var json = "";
-        for (var i = 0; i < data.length; i++)
-          json += String.fromCharCode(data[i]);
-        Module.symbols = JSON.parse(json);
-        errorHandler(demangleMessage(message, Module.symbols), filename, lineno);
-      }).catch(function (error) {
-        errorHandler(message, filename, lineno);
-      });
-    }
-  }
-
-#endif // SYMBOLS_FILENAME
 
   Module.abortHandler = function (message) {
-#if SYMBOLS_FILENAME
-    demanglingErrorHandler(message, "", 0);
-#else // SYMBOLS_FILENAME
     errorHandler(message, "", 0);
-#endif // SYMBOLS_FILENAME
     return true;
   };
 
@@ -383,117 +293,233 @@ function createUnityInstance(canvas, config, onProgress) {
     onProgress(0.9 * totalProgress);
   }
 
-#if USE_DATA_CACHING
-  {{{ read("UnityLoader/XMLHttpRequest.js") }}}
-#endif // USE_DATA_CACHING
+    Module.XMLHttpRequest = function () {
+    var UnityCacheDatabase = { name: "UnityCache", version: 2 };
+    var XMLHttpRequestStore = { name: "XMLHttpRequest", version: 1 };
+    var WebAssemblyStore = { name: "WebAssembly", version: 1 };
+    
+    function log(message) {
+      console.log("[UnityCache] " + message);
+    }
+    
+    function resolveURL(url) {
+      resolveURL.link = resolveURL.link || document.createElement("a");
+      resolveURL.link.href = url;
+      return resolveURL.link.href;
+    }
+    
+    function isCrossOriginURL(url) {
+      var originMatch = window.location.href.match(/^[a-z]+:\/\/[^\/]+/);
+      return !originMatch || url.lastIndexOf(originMatch[0], 0);
+    }
 
-#if DECOMPRESSION_FALLBACK
-  var decompressors = {
-#if DECOMPRESSION_FALLBACK == "Gzip"
-    gzip: {
-      require: {{{ read("UnityLoader/Gzip.js") }}},
-      decompress: function (data) {
-        if (!this.exports)
-          this.exports = this.require("inflate.js");
-        try { return this.exports.inflate(data) } catch (e) {};
-      },
-      hasUnityMarker: function (data) {
-        var commentOffset = 10, expectedComment = "UnityWeb Compressed Content (gzip)";
-        if (commentOffset > data.length || data[0] != 0x1F || data[1] != 0x8B)
-          return false;
-        var flags = data[3];
-        if (flags & 0x04) {
-          if (commentOffset + 2 > data.length)
-            return false;
-          commentOffset += 2 + data[commentOffset] + (data[commentOffset + 1] << 8);
-          if (commentOffset > data.length)
-            return false;
-        }
-        if (flags & 0x08) {
-          while (commentOffset < data.length && data[commentOffset])
-            commentOffset++;
-          if (commentOffset + 1 > data.length)
-            return false;
-          commentOffset++;
-        }
-        return (flags & 0x10) && String.fromCharCode.apply(null, data.subarray(commentOffset, commentOffset + expectedComment.length + 1)) == expectedComment + "\0";
-      },
-    },
-#endif // DECOMPRESSION_FALLBACK == "Gzip"
-#if DECOMPRESSION_FALLBACK == "Brotli"
-    br: {
-      require: {{{ read("UnityLoader/Brotli.js") }}},
-      decompress: function (data) {
-        if (!this.exports)
-          this.exports = this.require("decompress.js");
-        try { return this.exports(data) } catch (e) {};
-      },
-      hasUnityMarker: function (data) {
-        var expectedComment = "UnityWeb Compressed Content (brotli)";
-        if (!data.length)
-          return false;
-        var WBITS_length = (data[0] & 0x01) ? (data[0] & 0x0E) ? 4 : 7 : 1,
-            WBITS = data[0] & ((1 << WBITS_length) - 1),
-            MSKIPBYTES = 1 + ((Math.log(expectedComment.length - 1) / Math.log(2)) >> 3);
-            commentOffset = (WBITS_length + 1 + 2 + 1 + 2 + (MSKIPBYTES << 3) + 7) >> 3;
-        if (WBITS == 0x11 || commentOffset > data.length)
-          return false;
-        var expectedCommentPrefix = WBITS + (((3 << 1) + (MSKIPBYTES << 4) + ((expectedComment.length - 1) << 6)) << WBITS_length);
-        for (var i = 0; i < commentOffset; i++, expectedCommentPrefix >>>= 8) {
-          if (data[i] != (expectedCommentPrefix & 0xFF))
-            return false;
-        }
-        return String.fromCharCode.apply(null, data.subarray(commentOffset, commentOffset + expectedComment.length)) == expectedComment;
-      },
-    },
-#endif // DECOMPRESSION_FALLBACK == "Brotli"
-  };
+    function UnityCache() {
+      var cache = this;
+      cache.queue = [];
 
-  function decompress(compressed, url, callback) {
-    for (var contentEncoding in decompressors) {
-      if (decompressors[contentEncoding].hasUnityMarker(compressed)) {
-        if (url)
-          console.log("You can reduce startup time if you configure your web server to add \"Content-Encoding: " + contentEncoding + "\" response header when serving \"" + url + "\" file.");
-        var decompressor = decompressors[contentEncoding];
-        if (!decompressor.worker) {
-          var workerUrl = URL.createObjectURL(new Blob(["this.require = ", decompressor.require.toString(), "; this.decompress = ", decompressor.decompress.toString(), "; this.onmessage = ", function (e) {
-            var data = { id: e.data.id, decompressed: this.decompress(e.data.compressed) };
-            postMessage(data, data.decompressed ? [data.decompressed.buffer] : []);
-          }.toString(), "; postMessage({ ready: true });"], { type: "application/javascript" }));
-          decompressor.worker = new Worker(workerUrl);
-          decompressor.worker.onmessage = function (e) {
-            if (e.data.ready) {
-              URL.revokeObjectURL(workerUrl);
-              return;
-            }
-            this.callbacks[e.data.id](e.data.decompressed);
-            delete this.callbacks[e.data.id];
+      function initDatabase(database) {
+        if (typeof cache.database != "undefined")
+          return;
+        cache.database = database;
+        if (!cache.database)
+          log("indexedDB database could not be opened");
+        while (cache.queue.length) {
+          var queued = cache.queue.shift();
+          if (cache.database) {
+            cache.execute.apply(cache, queued);
+          } else if (typeof queued.onerror == "function") {
+            queued.onerror(new Error("operation cancelled"));
+          }
+        }
+      }
+      
+      try {
+        var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+        function upgradeDatabase() {
+          var openRequest = indexedDB.open(UnityCacheDatabase.name, UnityCacheDatabase.version);
+          openRequest.onupgradeneeded = function (e) {
+            var database = e.target.result;
+            if (!database.objectStoreNames.contains(WebAssemblyStore.name))
+              database.createObjectStore(WebAssemblyStore.name);
           };
-          decompressor.worker.callbacks = {};
-          decompressor.worker.nextCallbackId = 0;
+          openRequest.onsuccess = function (e) { initDatabase(e.target.result); };
+          openRequest.onerror = function () { initDatabase(null); };
         }
-        var id = decompressor.worker.nextCallbackId++;
-        decompressor.worker.callbacks[id] = callback;
-        decompressor.worker.postMessage({id: id, compressed: compressed}, [compressed.buffer]);
-        return;
+        var openRequest = indexedDB.open(UnityCacheDatabase.name);
+        openRequest.onupgradeneeded = function (e) {
+          var objectStore = e.target.result.createObjectStore(XMLHttpRequestStore.name, { keyPath: "url" });
+          ["version", "company", "product", "updated", "revalidated", "accessed"].forEach(function (index) { objectStore.createIndex(index, index); });
+        };
+        openRequest.onsuccess = function (e) {
+          var database = e.target.result;
+          if (database.version < UnityCacheDatabase.version) {
+            database.close();
+            upgradeDatabase();
+          } else {
+            initDatabase(database);
+          }
+        };
+        openRequest.onerror = function () { initDatabase(null); };
+      } catch (e) {
+        initDatabase(null);
+      }
+    };
+    
+    UnityCache.prototype.execute = function (store, operation, parameters, onsuccess, onerror) {
+      if (this.database) {
+        try {
+          var target = this.database.transaction([store], ["put", "delete", "clear"].indexOf(operation) != -1 ? "readwrite" : "readonly").objectStore(store);
+          if (operation == "openKeyCursor") {
+            target = target.index(parameters[0]);
+            parameters = parameters.slice(1);
+          }
+          var request = target[operation].apply(target, parameters);
+          if (typeof onsuccess == "function")
+            request.onsuccess = function (e) { onsuccess(e.target.result); };
+          request.onerror = onerror;
+        } catch (e) {
+          if (typeof onerror == "function")
+            onerror(e);
+        }
+      } else if (typeof this.database == "undefined") {
+        this.queue.push(arguments);
+      } else if (typeof onerror == "function") {
+        onerror(new Error("indexedDB access denied"));
+      }
+    };
+    
+    var unityCache = new UnityCache();
+    
+    function createXMLHttpRequestResult(url, company, product, timestamp, xhr) {
+      var result = { url: url, version: XMLHttpRequestStore.version, company: company, product: product, updated: timestamp, revalidated: timestamp, accessed: timestamp, responseHeaders: {}, xhr: {} };
+      if (xhr) {
+        ["Last-Modified", "ETag"].forEach(function (header) { result.responseHeaders[header] = xhr.getResponseHeader(header); });
+        ["responseURL", "status", "statusText", "response"].forEach(function (property) { result.xhr[property] = xhr[property]; });
+      }
+      return result;
+    }
+
+    function CachedXMLHttpRequest(objParameters) {
+      this.cache = { enabled: false };
+      if (objParameters) {
+        this.cache.control = objParameters.cacheControl;
+        this.cache.company = objParameters.companyName;
+        this.cache.product = objParameters.productName;
+      }
+      this.xhr = new XMLHttpRequest(objParameters);
+      this.xhr.addEventListener("load", function () {
+        var xhr = this.xhr, cache = this.cache;
+        if (!cache.enabled || cache.revalidated)
+          return;
+        if (xhr.status == 304) {
+          cache.result.revalidated = cache.result.accessed;
+          cache.revalidated = true;
+          unityCache.execute(XMLHttpRequestStore.name, "put", [cache.result]);
+          log("'" + cache.result.url + "' successfully revalidated and served from the indexedDB cache");
+        } else if (xhr.status == 200) {
+          cache.result = createXMLHttpRequestResult(cache.result.url, cache.company, cache.product, cache.result.accessed, xhr);
+          cache.revalidated = true;
+          unityCache.execute(XMLHttpRequestStore.name, "put", [cache.result], function (result) {
+            log("'" + cache.result.url + "' successfully downloaded and stored in the indexedDB cache");
+          }, function (error) {
+            log("'" + cache.result.url + "' successfully downloaded but not stored in the indexedDB cache due to the error: " + error);
+          });
+        } else {
+          log("'" + cache.result.url + "' request failed with status: " + xhr.status + " " + xhr.statusText);
+        }
+      }.bind(this));
+    };
+    
+    CachedXMLHttpRequest.prototype.send = function (data) {
+      var xhr = this.xhr, cache = this.cache;
+      var sendArguments = arguments;
+      cache.enabled = cache.enabled && xhr.responseType == "arraybuffer" && !data;
+      if (!cache.enabled)
+        return xhr.send.apply(xhr, sendArguments);
+      unityCache.execute(XMLHttpRequestStore.name, "get", [cache.result.url], function (result) {
+        if (!result || result.version != XMLHttpRequestStore.version) {
+          xhr.send.apply(xhr, sendArguments);
+          return;
+        }
+        cache.result = result;
+        cache.result.accessed = Date.now();
+        if (cache.control == "immutable") {
+          cache.revalidated = true;
+          unityCache.execute(XMLHttpRequestStore.name, "put", [cache.result]);
+          xhr.dispatchEvent(new Event('load'));
+          log("'" + cache.result.url + "' served from the indexedDB cache without revalidation");
+        } else if (isCrossOriginURL(cache.result.url) && (cache.result.responseHeaders["Last-Modified"] || cache.result.responseHeaders["ETag"])) {
+          var headXHR = new XMLHttpRequest();
+          headXHR.open("HEAD", cache.result.url);
+          headXHR.onload = function () {
+            cache.revalidated = ["Last-Modified", "ETag"].every(function (header) {
+              return !cache.result.responseHeaders[header] || cache.result.responseHeaders[header] == headXHR.getResponseHeader(header);
+            });
+            if (cache.revalidated) {
+              cache.result.revalidated = cache.result.accessed;
+              unityCache.execute(XMLHttpRequestStore.name, "put", [cache.result]);
+              xhr.dispatchEvent(new Event('load'));
+              log("'" + cache.result.url + "' successfully revalidated and served from the indexedDB cache");
+            } else {
+              xhr.send.apply(xhr, sendArguments);
+            }
+          }
+          headXHR.send();
+        } else {
+          if (cache.result.responseHeaders["Last-Modified"]) {
+            xhr.setRequestHeader("If-Modified-Since", cache.result.responseHeaders["Last-Modified"]);
+            xhr.setRequestHeader("Cache-Control", "no-cache");
+          } else if (cache.result.responseHeaders["ETag"]) {
+            xhr.setRequestHeader("If-None-Match", cache.result.responseHeaders["ETag"]);
+            xhr.setRequestHeader("Cache-Control", "no-cache");
+          }
+          xhr.send.apply(xhr, sendArguments);
+        }
+      }, function (error) {
+        xhr.send.apply(xhr, sendArguments);
+      });
+    };
+    
+    CachedXMLHttpRequest.prototype.open = function (method, url, async, user, password) {
+      this.cache.result = createXMLHttpRequestResult(resolveURL(url), this.cache.company, this.cache.product, Date.now());
+      this.cache.enabled = ["must-revalidate", "immutable"].indexOf(this.cache.control) != -1 && method == "GET" && this.cache.result.url.match("^https?:\/\/")
+        && (typeof async == "undefined" || async) && typeof user == "undefined" && typeof password == "undefined";
+      this.cache.revalidated = false;
+      return this.xhr.open.apply(this.xhr, arguments);
+    };
+    
+    CachedXMLHttpRequest.prototype.setRequestHeader = function (header, value) {
+      this.cache.enabled = false;
+      return this.xhr.setRequestHeader.apply(this.xhr, arguments);
+    };
+    
+    var xhr = new XMLHttpRequest();
+    for (var property in xhr) {
+      if (!CachedXMLHttpRequest.prototype.hasOwnProperty(property)) {
+        (function (property) {
+          Object.defineProperty(CachedXMLHttpRequest.prototype, property, typeof xhr[property] == "function" ? {
+            value: function () { return this.xhr[property].apply(this.xhr, arguments); },
+          } : {
+            get: function () { return this.cache.revalidated && this.cache.result.xhr.hasOwnProperty(property) ? this.cache.result.xhr[property] : this.xhr[property]; },
+            set: function (value) { this.xhr[property] = value; },
+          });
+        })(property);
       }
     }
-    callback(compressed);
-  }
-#endif // DECOMPRESSION_FALLBACK
+    
+    return CachedXMLHttpRequest;
+  } ();
+
+
 
   function downloadBinary(urlId) {
     return new Promise(function (resolve, reject) {
       progressUpdate(urlId);
-#if USE_DATA_CACHING
       var xhr = Module.companyName && Module.productName ? new Module.XMLHttpRequest({
         companyName: Module.companyName,
         productName: Module.productName,
         cacheControl: Module.cacheControl(Module[urlId]),
       }) : new XMLHttpRequest();
-#else // USE_DATA_CACHING
-      var xhr = new XMLHttpRequest();
-#endif // USE_DATA_CACHING
       xhr.open("GET", Module[urlId]);
       xhr.responseType = "arraybuffer";
       xhr.addEventListener("progress", function (e) {
@@ -501,31 +527,16 @@ function createUnityInstance(canvas, config, onProgress) {
       });
       xhr.addEventListener("load", function(e) {
         progressUpdate(urlId, e);
-#if DECOMPRESSION_FALLBACK
-        decompress(new Uint8Array(xhr.response), Module[urlId], resolve);
-#else // DECOMPRESSION_FALLBACK
         resolve(new Uint8Array(xhr.response));
-#endif // DECOMPRESSION_FALLBACK
       });
       xhr.send();
     });
   }
 
   function downloadFramework() {
-#if DECOMPRESSION_FALLBACK
-    return downloadBinary("frameworkUrl").then(function (code) {
-      var blobUrl = URL.createObjectURL(new Blob([code], { type: "application/javascript" }));
-#if USE_THREADS
-      Module.frameworkBlobUrl = blobUrl;
-#endif // USE_THREADS
-#endif // DECOMPRESSION_FALLBACK
       return new Promise(function (resolve, reject) {
         var script = document.createElement("script");
-#if DECOMPRESSION_FALLBACK
-        script.src = blobUrl;
-#else // DECOMPRESSION_FALLBACK
         script.src = Module.frameworkUrl;
-#endif // DECOMPRESSION_FALLBACK
         script.onload = function () {
           // Adding the framework.js script to DOM created a global
           // 'unityFramework' variable that should be considered internal.
@@ -537,9 +548,6 @@ function createUnityInstance(canvas, config, onProgress) {
           // Also ensure this function will not hold any JS scope
           // references to prevent JS garbage collection.
           script.onload = null;
-#if DECOMPRESSION_FALLBACK && !USE_THREADS
-          URL.revokeObjectURL(blobUrl);
-#endif // DECOMPRESSION_FALLBACK && !USE_THREADS
           resolve(fw);
         }
         document.body.appendChild(script);
@@ -547,86 +555,13 @@ function createUnityInstance(canvas, config, onProgress) {
           document.body.removeChild(script);
         });
       });
-#if DECOMPRESSION_FALLBACK
-    });
-#endif // DECOMPRESSION_FALLBACK
   }
 
-#if !USE_WASM
-  function downloadAsm() {
-#if DECOMPRESSION_FALLBACK
-    return downloadBinary("codeUrl").then(function (code) {
-      var blobUrl = URL.createObjectURL(new Blob([code], { type: "application/javascript" }));
-#endif // DECOMPRESSION_FALLBACK
-      return new Promise(function (resolve, reject) {
-        var script = document.createElement("script");
-#if DECOMPRESSION_FALLBACK
-        script.src = blobUrl;
-#else // DECOMPRESSION_FALLBACK
-        script.src = Module.codeUrl;
-#endif // DECOMPRESSION_FALLBACK
-#if USE_THREADS
-        Module.asmJsUrlOrBlob = script.src;
-#endif // USE_THREADS
-        script.onload = function () {
-          delete script.onload;
-#if DECOMPRESSION_FALLBACK && !USE_THREADS
-          URL.revokeObjectURL(blobUrl);
-#endif // DECOMPRESSION_FALLBACK && !USE_THREADS
-          resolve();
-        }
-        document.body.appendChild(script);
-        Module.deinitializers.push(function() {
-          document.body.removeChild(script);
-        });
-      });
-#if DECOMPRESSION_FALLBACK
-    });
-#endif // DECOMPRESSION_FALLBACK
-  }
-
-#endif // !USE_WASM
   function loadBuild() {
-#if USE_WASM
-#if DECOMPRESSION_FALLBACK
-    Promise.all([
-      downloadFramework(),
-      downloadBinary("codeUrl"),
-    ]).then(function (results) {
-      Module.wasmBinary = results[1];
-      results[0](Module);
-    });
-
-#else // DECOMPRESSION_FALLBACK
     downloadFramework().then(function (unityFramework) {
       unityFramework(Module);
     });
 
-#endif // DECOMPRESSION_FALLBACK
-#else // USE_WASM
-    Promise.all([
-      downloadFramework(),
-      downloadAsm(),
-    ]).then(function (results) {
-      results[0](Module);
-    });
-
-#endif // USE_WASM
-#if MEMORY_FILENAME
-    Module.memoryInitializerRequest = {
-      addEventListener: function (type, listener) {
-        if (type == "load")
-          Module.memoryInitializerRequest.useRequest = listener;
-      },
-    };
-    downloadBinary("memoryUrl").then(function (data) {
-      Module.memoryInitializerRequest.status = 200;
-      Module.memoryInitializerRequest.response = data;
-      if (Module.memoryInitializerRequest.useRequest)
-        Module.memoryInitializerRequest.useRequest();
-    });
-
-#endif // MEMORY_FILENAME
     var dataPromise = downloadBinary("dataUrl");
     Module.preRun.push(function () {
       Module.addRunDependency("dataUrl");
@@ -655,23 +590,11 @@ function createUnityInstance(canvas, config, onProgress) {
   return new Promise(function (resolve, reject) {
     if (!Module.SystemInfo.hasWebGL) {
       reject("Your browser does not support WebGL.");
-  #if !USE_WEBGL_1_0
-    } else if (Module.SystemInfo.hasWebGL == 1) {
-      reject("Your browser does not support graphics API \"WebGL 2.0\" which is required for this content.");
-  #endif // !USE_WEBGL_1_0
-  #if USE_WASM
     } else if (!Module.SystemInfo.hasWasm) {
       reject("Your browser does not support WebAssembly.");
-  #endif // USE_WASM
-  #if USE_THREADS
-    } else if (!Module.SystemInfo.hasThreads) {
-      reject("Your browser does not support multithreading.");
-  #endif // USE_THREADS
     } else {
-  #if USE_WEBGL_2_0
       if (Module.SystemInfo.hasWebGL == 1)
         Module.print("Warning: Your browser does not support \"WebGL 2.0\" Graphics API, switching to \"WebGL 1.0\"");
-  #endif // USE_WEBGL_2_0
       Module.startupErrorHandler = reject;
       onProgress(0);
       Module.postRun.push(function () {

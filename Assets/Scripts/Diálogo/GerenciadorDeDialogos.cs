@@ -49,22 +49,12 @@ public class GerenciadorDeDialogos : MonoBehaviour {
     public void ExecutarDialogo(Dialogo dialogo) {
         filaElementos.Clear();
 
-        int indexSentencas = 0;
-        int indexEscolhas = 0;
-
-		//Definir fila de elementos
-        foreach (int element in dialogo.ordemElementos) {
-            switch(dialogo.tiposElementos[element]) {
-                case "Sentence":
-                    filaElementos.Enqueue(dialogo.sentencas[indexSentencas]);
-                    indexSentencas++;
-                    break;
-                case "Choice":
-                    filaElementos.Enqueue(dialogo.escolhas[indexEscolhas]);
-                    indexEscolhas++;
-                    break;
-            }
-        }
+        foreach (Sentenca sentenca in dialogo.sentencas) {
+			filaElementos.Enqueue(sentenca);
+		}
+		if (dialogo.escolha.opcoes.Count > 0) {
+			filaElementos.Enqueue(dialogo.escolha);
+		}
         ExecutarProximoElemento();
 	}
 
@@ -106,18 +96,23 @@ public class GerenciadorDeDialogos : MonoBehaviour {
 
 		for (int i = 0; i < opcoes.Count; i++) {
 			botoesOpcoes[i].gameObject.SetActive(true);
-			botoesOpcoes[i].GetComponentInChildren<TextMeshProUGUI>().text = opcoes[i].text;
+			botoesOpcoes[i].GetComponentInChildren<TextMeshProUGUI>().text = opcoes[i].texto;
 		}
 	}
 
 	public void EscolherOpcao(int indexOpcao) { //Acionado no clique dos botões de execução
 		if (escolhendo) {
 			escolhendo = false;
-			SistemaSalvamento.SalvarDado(opcoesAtivas[indexOpcao].text);
+
+			if (dialogo.questionario) {
+				Jogador.SalvarResposta(opcoesAtivas[indexOpcao].id);
+			}
+
 			if (opcoesAtivas[indexOpcao].dialogoConectado == null) {
 				ExecutarProximoElemento();
 				return;
 			}
+
 			ExecutarDialogo(opcoesAtivas[indexOpcao].dialogoConectado);
 		}
 	}

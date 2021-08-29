@@ -12,16 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3bc3f398c2f6db47a6de70abd308a03, type: 3}
   m_Name: "Situa\xE7\xE3o 10"
   m_EditorClassIdentifier: 
+  questionario: 1
+  id: 10
   sentencas:
   - texto: "Mais um dia est\xE1 chegando ao fim."
   - texto: "Amanh\xE3 \xE9 o segundo dia de uma longa semana."
   - texto: 'Miguel:'
-  escolhas:
-  - opcoes:
-    - text: "J\xE1 arruma tudo que vai precisar para amanh\xE3."
+  escolha:
+    opcoes:
+    - texto: "N\xE3o deixa nada arrumado."
       dialogoConectado: {fileID: 0}
-    - text: Coloca o despertador um pouco mais cedo.
+      id: 26
+    - texto: Coloca o despertador um pouco mais cedo.
       dialogoConectado: {fileID: 0}
-    - text: "N\xE3o deixa nada arrumado."
+      id: 27
+    - texto: "J\xE1 arruma tudo que vai precisar para amanh\xE3."
       dialogoConectado: {fileID: 0}
-  ordemElementos: 00000000000000000000000001000000
+      id: 28

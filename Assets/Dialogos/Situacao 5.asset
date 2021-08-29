@@ -12,17 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3bc3f398c2f6db47a6de70abd308a03, type: 3}
   m_Name: Situacao 5
   m_EditorClassIdentifier: 
+  questionario: 1
+  id: 5
   sentencas:
   - texto: "Ap\xF3s o fim do expediente, ele est\xE1 \xE0 caminho da sua aula."
   - texto: "Navegando nas redes, um an\xFAncio de um novo t\xEAnis chama sua aten\xE7\xE3o."
   - texto: "Miguel se encanta pelo modelo, que por ser um novo lan\xE7amento, est\xE1
       com um pre\xE7o acima da m\xE9dia que ele costuma pagar normalmente. "
-  escolhas:
-  - opcoes:
-    - text: "Comprar pelo cart\xE3o de cr\xE9dito em v\xE1rias parcelas."
+  escolha:
+    opcoes:
+    - texto: Economizar para comprar a vista mais pra frente.
       dialogoConectado: {fileID: 0}
-    - text: "N\xE3o comprar o produto, pois n\xE3o est\xE1 precisando."
+      id: 10
+    - texto: "N\xE3o comprar o produto, pois n\xE3o est\xE1 precisando."
       dialogoConectado: {fileID: 0}
-    - text: Economizar para comprar a vista mais pra frente.
+      id: 11
+    - texto: "Comprar pelo cart\xE3o de cr\xE9dito em v\xE1rias parcelas."
       dialogoConectado: {fileID: 0}
-  ordemElementos: 00000000000000000000000001000000
+      id: 12
