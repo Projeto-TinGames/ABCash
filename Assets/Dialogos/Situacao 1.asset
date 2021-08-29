@@ -12,14 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3bc3f398c2f6db47a6de70abd308a03, type: 3}
   m_Name: Situacao 1
   m_EditorClassIdentifier: 
+  questionario: 1
+  id: 1
   sentencas:
   - texto: 'No outro dia, ele acorda iniciando um novo ciclo da sua vida. '
   - texto: "\xC9 sua primeira segunda-feira ap\xF3s a mudan\xE7a."
   - texto: "O despertador toca, indicando que est\xE1 na hora de levantar.\r"
-  escolhas:
-  - opcoes:
-    - text: 'Ele fica alguns minutos na cama. '
+  escolha:
+    opcoes:
+    - texto: Ele sai logo da cama.
       dialogoConectado: {fileID: 0}
-    - text: Ele sai logo da cama.
+      id: 1
+    - texto: Ele fica alguns minutos na cama.
       dialogoConectado: {fileID: 0}
-  ordemElementos: 00000000000000000000000001000000
+      id: 2

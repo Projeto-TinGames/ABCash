@@ -8,7 +8,7 @@ public class ComecarScript : MonoBehaviour {
     public InputField input;
 
     public void ComecarJogo() {
-        DadoJogador.instancia.DefineNome(input.text);
+        Jogador.DefineNome(input.text);
         GerenciadorDeCenas.instancia.FinalizarCena();
     }
 

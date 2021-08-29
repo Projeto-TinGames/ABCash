@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3bc3f398c2f6db47a6de70abd308a03, type: 3}
   m_Name: "Situa\xE7\xE3o 8"
   m_EditorClassIdentifier: 
+  questionario: 1
+  id: 8
   sentencas:
   - texto: "Chegando em casa, ap\xF3s um longo dia, Miguel est\xE1 fazendo sua \xFAltima
       refei\xE7\xE3o e liga a tv para quebrar o sil\xEAncio."
@@ -20,12 +22,14 @@ MonoBehaviour:
       segundo o an\xFAncio."
   - texto: "Seu aparelho atual ainda lhe serve bem, mas n\xE3o \xE9 um aparelho novo."
   - texto: "Ap\xF3s assistir o an\xFAncio, Miguel:"
-  escolhas:
-  - opcoes:
-    - text: Visita lojas online buscando pelo aparelho anunciado.
+  escolha:
+    opcoes:
+    - texto: Decide ignorar ele por enquanto.
       dialogoConectado: {fileID: 0}
-    - text: "Visita lojas comparando modelos e pre\xE7os."
+      id: 19
+    - texto: "Visita lojas comparando modelos e pre\xE7os."
       dialogoConectado: {fileID: 0}
-    - text: Decide ignorar ele por enquanto.
+      id: 20
+    - texto: Visita lojas online buscando pelo aparelho anunciado.
       dialogoConectado: {fileID: 0}
-  ordemElementos: 0000000000000000000000000000000001000000
+      id: 21

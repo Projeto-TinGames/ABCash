@@ -12,18 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3bc3f398c2f6db47a6de70abd308a03, type: 3}
   m_Name: "Situa\xE7\xE3o 9"
   m_EditorClassIdentifier: 
+  questionario: 1
+  id: 9
   sentencas:
   - texto: "Pensando nas f\xE9rias de final de ano, Miguel quer aproveitar para fazer
       uma viagem esse ano."
   - texto: " Ainda faltam muitos meses, ent\xE3o:"
-  escolhas:
-  - opcoes:
-    - text: Ele planeja poupar uma quantia boa todos os meses.
+  escolha:
+    opcoes:
+    - texto: Ele vai guardando o que der.
       dialogoConectado: {fileID: 0}
-    - text: "Ele n\xE3o estipula um valor fixo, mas planeja poupar."
+      id: 22
+    - texto: Ele separa a quantia que sobrar todos os meses.
       dialogoConectado: {fileID: 0}
-    - text: Ele separa a quantia que sobrar todos os meses.
+      id: 23
+    - texto: "Ele n\xE3o estipula um valor fixo, mas planeja poupar."
       dialogoConectado: {fileID: 0}
-    - text: Ele vai guardando o que der.
+      id: 24
+    - texto: Ele planeja poupar uma quantia boa todos os meses.
       dialogoConectado: {fileID: 0}
-  ordemElementos: 000000000000000001000000
+      id: 25

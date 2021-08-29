@@ -12,14 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3bc3f398c2f6db47a6de70abd308a03, type: 3}
   m_Name: Situacao 3
   m_EditorClassIdentifier: 
+  questionario: 1
+  id: 3
   sentencas:
   - texto: "\xC9 hora do almo\xE7o."
   - texto: "Antes da mudan\xE7a, a marmita de Miguel era feita por sua m\xE3e."
   - texto: "Agora, \xE9 preciso se ajustar frente \xE0 essa nova realidade:\r"
-  escolhas:
-  - opcoes:
-    - text: "Ir no restaurante pr\xF3ximo ao local do trabalho."
+  escolha:
+    opcoes:
+    - texto: "Optar por se organizar e fazer sua pr\xF3pria marmita."
       dialogoConectado: {fileID: 0}
-    - text: "Optar por se organizar e fazer sua pr\xF3pria marmita. "
+      id: 5
+    - texto: "Ir no restaurante pr\xF3ximo ao local do trabalho."
       dialogoConectado: {fileID: 0}
-  ordemElementos: 00000000000000000000000001000000
+      id: 6

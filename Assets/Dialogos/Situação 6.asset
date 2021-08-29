@@ -12,17 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3bc3f398c2f6db47a6de70abd308a03, type: 3}
   m_Name: "Situa\xE7\xE3o 6"
   m_EditorClassIdentifier: 
+  questionario: 1
+  id: 6
   sentencas:
   - texto: "Chegando \xE0 sua universidade, Miguel est\xE1 com fome e precisa comer
       algo antes da sua aula."
   - texto: "Ent\xE3o, ele vai at\xE9 a cantina e tem de escolher algo para comer."
   - texto: "Ele est\xE1 com vontade de comer um sandu\xEDche."
-  escolhas:
-  - opcoes:
-    - text: "Ele pega um sandu\xEDche de frango."
+  escolha:
+    opcoes:
+    - texto: "Ele pega um sandu\xEDche vegetariano."
       dialogoConectado: {fileID: 0}
-    - text: "Ele pega um sandu\xEDche de carne."
+      id: 13
+    - texto: "Ele pega um sandu\xEDche de carne."
       dialogoConectado: {fileID: 0}
-    - text: "Ele pega um sandu\xEDche vegetariano."
+      id: 14
+    - texto: "Ele pega um sandu\xEDche de frango."
       dialogoConectado: {fileID: 0}
-  ordemElementos: 00000000000000000000000001000000
+      id: 15

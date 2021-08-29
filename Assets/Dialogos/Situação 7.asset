@@ -12,18 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3bc3f398c2f6db47a6de70abd308a03, type: 3}
   m_Name: "Situa\xE7\xE3o 7"
   m_EditorClassIdentifier: 
+  questionario: 1
+  id: 7
   sentencas:
   - texto: "Durante a aula, o professor passa as instru\xE7\xF5es sobre um trabalho
       que a turma de Miguel dever\xE1 entregar daqui h\xE1 um m\xEAs."
   - texto: "O trabalho \xE9 individual e um pouco extenso, por isso o prazo \xE9
       longo."
   - texto: "Ent\xE3o, Miguel:"
-  escolhas:
-  - opcoes:
-    - text: "N\xE3o est\xE1 muito preocupado com o trabalho."
+  escolha:
+    opcoes:
+    - texto: "Trabalha o m\xE1ximo poss\xEDvel no pr\xF3ximo tempo livre."
       dialogoConectado: {fileID: 0}
-    - text: Trabalha ao menos 30 min por dia no trabalho.
+      id: 16
+    - texto: Trabalha ao menos 30 min por dia no trabalho.
       dialogoConectado: {fileID: 0}
-    - text: "Trabalha o m\xE1ximo poss\xEDvel no pr\xF3ximo tempo livre."
+      id: 17
+    - texto: "N\xE3o est\xE1 muito preocupado com o trabalho."
       dialogoConectado: {fileID: 0}
-  ordemElementos: 00000000000000000000000001000000
+      id: 18
