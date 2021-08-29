@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine.Networking;
 
 public class ComunicacaoBanco : MonoBehaviour {
-    public string url = "http://localhost:3000/tingames/abcash";
+    private string url = "https://projetos.restinga.ifrs.edu.br/tingames/abcash";//"http://localhost:3000/tingames/abcash"; 
     public static ComunicacaoBanco instance;
 
     private void Awake() {
