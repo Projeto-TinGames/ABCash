@@ -96,6 +96,7 @@ public class GerenciadorDeDialogos : MonoBehaviour {
 
 		for (int i = 0; i < opcoes.Count; i++) {
 			botoesOpcoes[i].gameObject.SetActive(true);
+			botoesOpcoes[i].interactable = true;
 			botoesOpcoes[i].GetComponentInChildren<TextMeshProUGUI>().text = opcoes[i].texto;
 		}
 	}
